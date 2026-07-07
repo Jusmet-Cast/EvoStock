@@ -1,0 +1,14 @@
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+
+# Frontend (evostock-web), once scaffolded
+evostock-web/node_modules/
+evostock-web/dist/
+evostock-web/.angular/
