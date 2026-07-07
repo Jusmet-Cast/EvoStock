@@ -1,0 +1,17 @@
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: evostock-mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: evostock
+      MYSQL_USER: evostock
+      MYSQL_PASSWORD: evostock
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - "3306:3306"
+    volumes:
+      - evostock-mysql-data:/var/lib/mysql
+
+volumes:
+  evostock-mysql-data:
