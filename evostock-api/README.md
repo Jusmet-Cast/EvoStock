@@ -1,58 +1,121 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# EvoStock API
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Backend del Sistema de Gestión de Productos (prueba técnica — Programador Digital Senior, Evollution / Corporación Lady Lee). Expone una API REST (Laravel + Sanctum) para los módulos de Categorías, Productos y Dashboard, consumida por un cliente Angular (en `evostock-web`, en desarrollo).
 
-## About Laravel
+## 1. Tecnología utilizada
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+- **Laravel 13** (PHP 8.3+) — API REST.
+- **MySQL 8** — persistencia.
+- **Laravel Sanctum** — autenticación por token (Bearer).
+- **Docker Compose** — MySQL local sin necesidad de instalarlo nativamente.
+- **PHPUnit** — tests de feature sobre SQLite en memoria.
+- **Laravel Pint** — estilo de código.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## 2. Justificación de la elección
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Elegí **Laravel sobre Next.js**, y vale la pena ser honesto sobre el motivo: no fue por dominio previo del framework. Tenía nociones generales de PHP pero no experiencia amplia con Laravel. La decisión fue justamente lo contrario a "ir a lo seguro": Corporación Lady Lee usa Laravel como uno de sus frameworks principales, así que lo tomé como un reto autoimpuesto para:
 
-## Learning Laravel
+- Desempolvar y profundizar mis conocimientos de PHP.
+- Alinearme desde ya con el stack técnico que se maneja en el corporativo.
+- Aprender a llevar criterios de lógica, estructura y arquitectura (que ya tenía interiorizados en otros lenguajes/frameworks) a las convenciones propias de Laravel.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+En otras palabras, también usé la prueba como una oportunidad de acoplamiento al ambiente técnico de la empresa, más que como una demostración de una habilidad ya dominada. Adicionalmente, el dominio del problema (CRUD con reglas de negocio, relaciones N:M, agregaciones para el dashboard) encaja naturalmente con Eloquent, migraciones y validación nativa de Laravel, y separar API (Laravel) de UI (Angular) me permite demostrar diseño de arquitectura en ambos lados de forma independiente.
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+**Arquitectura**: Controllers delgados → Form Requests (validación) → Services (lógica de negocio) → Repositories (solo para queries específicas: filtros, paginación, agregados) → Eloquent Models. Ver detalle en la sección 9.
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
+## 3. Requisitos
 
-## Agentic Development
+- PHP >= 8.3 con extensiones `pdo_mysql`, `mbstring`, `openssl`.
+- Composer 2.x.
+- MySQL 8 (vía Docker, recomendado) o una instancia local propia.
+- Docker Desktop (si se usa el `docker-compose.yml` incluido).
 
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+## 4. Instalación
 
 ```bash
-composer require laravel/boost --dev
+git clone <url-del-repositorio>
+cd EvoStock/evostock-api
 
-php artisan boost:install
+composer install
+cp .env.example .env
+php artisan key:generate
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+## 5. Configuración
 
-## Contributing
+Levantar MySQL con Docker (recomendado, no requiere instalar MySQL nativo):
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+```bash
+docker compose up -d
+```
 
-## Code of Conduct
+Esto crea una base de datos `evostock` en `127.0.0.1:3306` con las credenciales ya definidas en `.env.example`. Si prefieres un MySQL propio (XAMPP, Laragon, etc.), simplemente ajusta `DB_HOST`, `DB_DATABASE`, `DB_USERNAME` y `DB_PASSWORD` en tu `.env`.
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+## 6. Variables de entorno
 
-## Security Vulnerabilities
+Las relevantes para este proyecto (ya presentes en `.env.example`):
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+| Variable | Descripción | Valor por defecto |
+|---|---|---|
+| `DB_CONNECTION` | Driver de base de datos | `mysql` |
+| `DB_HOST` | Host de MySQL | `127.0.0.1` |
+| `DB_PORT` | Puerto de MySQL | `3306` |
+| `DB_DATABASE` | Nombre de la base de datos | `evostock` |
+| `DB_USERNAME` | Usuario de MySQL | `evostock` |
+| `DB_PASSWORD` | Password de MySQL | `evostock` |
+| `APP_URL` | URL base de la API | `http://localhost` |
 
-## License
+CORS ya está configurado en `config/cors.php` para aceptar `http://localhost:4200` (Angular en desarrollo).
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## 7. Instrucciones para ejecutar el proyecto
+
+```bash
+php artisan migrate --seed   # crea el esquema y datos de ejemplo (usuario de prueba incluido)
+php artisan serve            # sirve la API en http://127.0.0.1:8000
+```
+
+Ejecutar los tests (no requieren MySQL, corren sobre SQLite en memoria):
+
+```bash
+php artisan test
+```
+
+### Endpoints principales (`/api/v1`)
+
+| Método | Ruta | Descripción | Auth |
+|---|---|---|---|
+| POST | `/auth/login` | Login, devuelve token Sanctum | No |
+| POST | `/auth/logout` | Revoca el token actual | Sí |
+| GET | `/auth/me` | Usuario autenticado | Sí |
+| GET/POST | `/categories` | Listar (con `search`) / crear | Sí |
+| GET/PUT/DELETE | `/categories/{id}` | Detalle / actualizar / eliminar (soft delete) | Sí |
+| GET/POST | `/products` | Listar (con `search`, `category_id`, `status`, `sort_by`, `sort_dir`) / crear | Sí |
+| GET/PUT/DELETE | `/products/{id}` | Detalle / actualizar / eliminar (soft delete) | Sí |
+| GET | `/dashboard` | Totales, activos/inactivos, bajo inventario, últimos productos | Sí |
+
+Todas las rutas protegidas usan `Authorization: Bearer <token>` obtenido en el login.
+
+## 8. Usuario de prueba
+
+Creado por el seeder (`php artisan migrate --seed`):
+
+- **Email:** `test@evostock.com`
+- **Password:** `password`
+
+## 9. Explicación breve de la arquitectura
+
+```
+Request → Controller (Api/V1) → Form Request (validación) → Service (lógica de negocio)
+                                                                   ↓
+                                                    Repository (solo queries específicas)
+                                                                   ↓
+                                                            Eloquent Model → MySQL
+```
+
+- **Controllers** (`app/Http/Controllers/Api/V1`): solo orquestan HTTP — reciben la request ya validada, delegan al Service y devuelven un `API Resource`.
+- **Form Requests** (`app/Http/Requests`): validación de entrada declarativa por endpoint.
+- **Services** (`app/Services`): dueños de las reglas de negocio. Ejemplos: `CategoryService` rechaza nombres duplicados (usando `CategoryRepositoryInterface::nameExists()`); `ProductService` sincroniza la relación N:M con categorías en cada create/update; `DashboardService` agrega los indicadores del panel.
+- **Repositories** (`app/Repositories`): **deliberadamente delgados**. Solo exponen las queries que Eloquent no resuelve "gratis" (paginación filtrada/ordenada, chequeo de unicidad, agregados del dashboard). El CRUD trivial (`create`, `update`, `delete`) se hace directo con el Eloquent Model dentro del Service — envolver eso en un Repository genérico no aportaría nada real, ya que Eloquent es en sí mismo una capa de acceso a datos. Las interfaces (`Contracts/`) están inyectadas por contrato (bindeadas en `RepositoryServiceProvider`) para mantener inversión de dependencias y facilitar tests.
+- **API Resources** (`app/Http/Resources`): dan forma consistente a las respuestas JSON, independiente de cómo estén modelados los datos internamente.
+- **Modelos**: `Category` y `Product` con relación `belongsToMany` (tabla pivote `category_product`), `SoftDeletes` para poder "eliminar o desactivar" sin perder historial, y un flag `is_active` para el filtro de estado.
+- **Auth**: Sanctum en modo *token* (no cookies SPA), ya que el frontend Angular vive en otro origen/puerto — evita la complejidad de dominios "stateful" y CSRF que solo aplica al modo cookie de Sanctum.
