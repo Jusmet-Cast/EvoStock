@@ -2,6 +2,7 @@
 
 namespace App\Repositories\Contracts;
 
+use App\Models\Product;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
 
@@ -19,7 +20,7 @@ interface ProductRepositoryInterface
     public function countLowStock(int $threshold = 10): int;
 
     /**
-     * @return Collection<int, \App\Models\Product>
+     * @return Collection<int, Product>
      */
     public function latest(int $limit = 5): Collection;
 }

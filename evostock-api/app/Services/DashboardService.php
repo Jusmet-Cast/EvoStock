@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Models\Category;
 use App\Models\Product;
 use App\Repositories\Contracts\ProductRepositoryInterface;
+use Illuminate\Database\Eloquent\Collection;
 
 class DashboardService
 {
@@ -23,7 +24,7 @@ class DashboardService
      *     active_products: int,
      *     inactive_products: int,
      *     low_stock_products: int,
-     *     latest_products: \Illuminate\Database\Eloquent\Collection<int, Product>,
+     *     latest_products: Collection<int, Product>,
      * }
      */
     public function summary(): array
