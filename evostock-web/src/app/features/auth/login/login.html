@@ -1,11 +1,17 @@
 <div class="login-page">
-  <mat-card class="login-card">
-    <mat-card-header>
-      <mat-card-title>EvoStock</mat-card-title>
-      <mat-card-subtitle>Sistema de gestión de productos</mat-card-subtitle>
-    </mat-card-header>
+  <section class="login-brand">
+    <img src="assets/branding/logo-cll-white.png" alt="Corporación LadyLee" class="login-brand-logo" />
+    <div class="login-brand-copy">
+      <h1>EvoStock</h1>
+      <p>Sistema de gestión de productos de Corporación LadyLee.</p>
+    </div>
+  </section>
 
-    <mat-card-content>
+  <section class="login-form-panel">
+    <div class="login-form-wrap">
+      <h2>Iniciar sesión</h2>
+      <p class="login-form-subtitle">Ingresa tus credenciales para continuar.</p>
+
       <form [formGroup]="form" (ngSubmit)="submit()" class="login-form">
         <mat-form-field appearance="outline">
           <mat-label>Correo electrónico</mat-label>
@@ -38,6 +44,6 @@
           }
         </button>
       </form>
-    </mat-card-content>
-  </mat-card>
+    </div>
+  </section>
 </div>
