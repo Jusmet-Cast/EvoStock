@@ -1,4 +1,4 @@
-import { CurrencyPipe } from '@angular/common';
+import { CurrencyPipe, DatePipe } from '@angular/common';
 import { Component, inject, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
@@ -24,21 +24,22 @@ import { ProductsService } from '../products.service';
 
 type SortOption = {
   label: string;
-  sortBy: 'name' | 'created_at';
+  sortBy: 'name' | 'entry_date';
   sortDir: 'asc' | 'desc';
 };
 
 const SORT_OPTIONS: SortOption[] = [
   { label: 'Nombre (A-Z)', sortBy: 'name', sortDir: 'asc' },
   { label: 'Nombre (Z-A)', sortBy: 'name', sortDir: 'desc' },
-  { label: 'Más recientes primero', sortBy: 'created_at', sortDir: 'desc' },
-  { label: 'Más antiguos primero', sortBy: 'created_at', sortDir: 'asc' },
+  { label: 'Ingreso más reciente', sortBy: 'entry_date', sortDir: 'desc' },
+  { label: 'Ingreso más antiguo', sortBy: 'entry_date', sortDir: 'asc' },
 ];
 
 @Component({
   selector: 'app-products-list',
   imports: [
     CurrencyPipe,
+    DatePipe,
     ReactiveFormsModule,
     MatButtonModule,
     MatChipsModule,
@@ -60,7 +61,7 @@ export class ProductsList {
   private readonly dialog = inject(MatDialog);
   private readonly notifications = inject(NotificationService);
 
-  readonly displayedColumns = ['name', 'price', 'stock', 'categories', 'is_active', 'actions'];
+  readonly displayedColumns = ['name', 'price', 'stock', 'entry_date', 'categories', 'is_active', 'actions'];
   readonly sortOptions = SORT_OPTIONS;
 
   readonly searchControl = new FormControl('', { nonNullable: true });

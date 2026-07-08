@@ -1,4 +1,4 @@
-import { CurrencyPipe } from '@angular/common';
+import { CurrencyPipe, DatePipe } from '@angular/common';
 import { Component, inject, signal } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatChipsModule } from '@angular/material/chips';
@@ -19,6 +19,7 @@ interface StatCard {
   selector: 'app-dashboard',
   imports: [
     CurrencyPipe,
+    DatePipe,
     MatCardModule,
     MatChipsModule,
     MatIconModule,
@@ -31,7 +32,7 @@ interface StatCard {
 export class Dashboard {
   private readonly dashboardService = inject(DashboardService);
 
-  readonly displayedColumns = ['name', 'price', 'stock', 'is_active'];
+  readonly displayedColumns = ['name', 'price', 'stock', 'entry_date', 'is_active'];
   readonly loading = signal(true);
   readonly summary = signal<DashboardSummary | null>(null);
   readonly cards = signal<StatCard[]>([]);
