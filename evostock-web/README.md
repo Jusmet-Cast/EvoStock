@@ -24,6 +24,7 @@ Dentro de Angular, elegí **Angular Material** sobre un Tailwind a medida porque
 ## 4. Instalación
 
 ```bash
+git clone https://github.com/Jusmet-Cast/EvoStock.git
 cd EvoStock/evostock-web
 npm install
 ```
