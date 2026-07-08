@@ -59,7 +59,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .table-card {
   background-color: var(--mat-sys-surface-container-low);
   border-radius: 12px;
-  overflow: hidden;
+  overflow-x: auto;
 }
 
 .data-table {
