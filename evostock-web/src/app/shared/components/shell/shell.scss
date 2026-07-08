@@ -4,28 +4,17 @@
 
 .shell-sidenav {
   width: 240px;
+  padding-top: 8px;
 }
 
-.shell-brand {
-  display: flex;
-  align-items: center;
-  padding: 20px 24px;
-}
-
-.shell-brand-logo {
-  height: 40px;
-  width: auto;
-}
-
-.shell-toolbar-logo {
-  height: 24px;
-  width: auto;
+.shell-toolbar {
+  --mat-toolbar-standard-height: 56px;
+  --mat-toolbar-mobile-height: 56px;
 }
 
 .shell-title {
   font-weight: 600;
   letter-spacing: 0.02em;
-  margin-left: 8px;
 }
 
 .shell-spacer {

@@ -5,9 +5,6 @@
     [mode]="isHandset() ? 'over' : 'side'"
     [opened]="!isHandset()"
   >
-    <div class="shell-brand">
-      <img src="assets/branding/logo-cll-color.png" alt="Corporación LadyLee" class="shell-brand-logo" />
-    </div>
     <mat-nav-list>
       @for (item of navItems; track item.path) {
         <a
@@ -30,7 +27,6 @@
         <button mat-icon-button (click)="sidenav.toggle()" aria-label="Abrir menú">
           <mat-icon>menu</mat-icon>
         </button>
-        <img src="assets/branding/logo-cll-color.png" alt="" class="shell-toolbar-logo" />
       }
       <span class="shell-title">EvoStock</span>
       <span class="shell-spacer"></span>
