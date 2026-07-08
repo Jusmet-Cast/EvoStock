@@ -22,13 +22,26 @@ class ProductCrudTest extends TestCase
             'name' => 'Laptop',
             'price' => 999.99,
             'stock' => 5,
+            'entry_date' => '2026-01-15',
             'category_ids' => $categories->pluck('id')->all(),
         ]);
 
         $response->assertCreated()
             ->assertJsonPath('data.name', 'Laptop')
+            ->assertJsonPath('data.entry_date', '2026-01-15')
             ->assertJsonCount(2, 'data.categories');
-        $this->assertDatabaseHas('products', ['name' => 'Laptop']);
+        $this->assertDatabaseHas('products', ['name' => 'Laptop', 'entry_date' => '2026-01-15']);
+    }
+
+    public function test_it_requires_an_entry_date_on_create(): void
+    {
+        Sanctum::actingAs(User::factory()->create());
+
+        $this->postJson('/api/v1/products', [
+            'name' => 'Sin fecha',
+            'price' => 10,
+            'stock' => 1,
+        ])->assertStatus(422)->assertJsonValidationErrors('entry_date');
     }
 
     public function test_it_filters_products_by_category(): void
@@ -69,6 +82,19 @@ class ProductCrudTest extends TestCase
 
         $this->assertSame('Audífonos', $response->json('data.0.name'));
         $this->assertSame('Zapato', $response->json('data.1.name'));
+    }
+
+    public function test_it_sorts_products_by_entry_date(): void
+    {
+        Product::factory()->create(['name' => 'Antiguo', 'entry_date' => '2024-01-01']);
+        Product::factory()->create(['name' => 'Reciente', 'entry_date' => '2026-06-01']);
+
+        Sanctum::actingAs(User::factory()->create());
+
+        $response = $this->getJson('/api/v1/products?sort_by=entry_date&sort_dir=desc')->assertOk();
+
+        $this->assertSame('Reciente', $response->json('data.0.name'));
+        $this->assertSame('Antiguo', $response->json('data.1.name'));
     }
 
     public function test_it_deletes_a_product(): void

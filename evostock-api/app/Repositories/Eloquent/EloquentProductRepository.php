@@ -9,13 +9,13 @@ use Illuminate\Pagination\LengthAwarePaginator;
 
 class EloquentProductRepository implements ProductRepositoryInterface
 {
-    private const SORTABLE_COLUMNS = ['name', 'created_at'];
+    private const SORTABLE_COLUMNS = ['name', 'entry_date'];
 
     public function paginate(array $filters, int $perPage = 15): LengthAwarePaginator
     {
         $sortBy = in_array($filters['sort_by'] ?? null, self::SORTABLE_COLUMNS, true)
             ? $filters['sort_by']
-            : 'created_at';
+            : 'entry_date';
 
         $sortDir = ($filters['sort_dir'] ?? null) === 'asc' ? 'asc' : 'desc';
 
@@ -49,6 +49,10 @@ class EloquentProductRepository implements ProductRepositoryInterface
 
     public function latest(int $limit = 5): Collection
     {
-        return Product::query()->latest()->limit($limit)->get();
+        return Product::query()
+            ->orderByDesc('entry_date')
+            ->orderByDesc('id')
+            ->limit($limit)
+            ->get();
     }
 }

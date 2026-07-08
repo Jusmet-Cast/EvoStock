@@ -22,6 +22,7 @@ class ProductFactory extends Factory
             'description' => $this->faker->optional()->paragraph(),
             'price' => $this->faker->randomFloat(2, 5, 500),
             'stock' => $this->faker->numberBetween(0, 100),
+            'entry_date' => $this->faker->dateTimeBetween('-1 year', 'now')->format('Y-m-d'),
             'is_active' => true,
         ];
     }

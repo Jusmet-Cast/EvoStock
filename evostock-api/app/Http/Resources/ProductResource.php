@@ -20,6 +20,7 @@ class ProductResource extends JsonResource
             'description' => $this->description,
             'price' => (float) $this->price,
             'stock' => $this->stock,
+            'entry_date' => $this->entry_date?->toDateString(),
             'is_active' => $this->is_active,
             'categories' => CategoryResource::collection($this->whenLoaded('categories')),
             'created_at' => $this->created_at,
