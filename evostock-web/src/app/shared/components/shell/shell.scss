@@ -11,6 +11,9 @@ $brand-gradient: linear-gradient(135deg, var(--mat-sys-primary), var(--mat-sys-t
   background: $brand-gradient;
   color: #fff;
   box-shadow: none;
+  // Material 3 rounds the drawer's outer corner by default — that's the
+  // sliver of background peeking through at the sidenav/toolbar seam.
+  --mat-sidenav-container-shape: 0;
 
   // Nav item text/icons default to on-surface (dark) — override for
   // legibility against the blue background.
