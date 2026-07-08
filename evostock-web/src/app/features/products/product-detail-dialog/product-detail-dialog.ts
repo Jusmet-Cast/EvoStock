@@ -5,6 +5,7 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { Product } from '../../../core/models/product.model';
+import { categoryChipClass } from '../../../shared/utils/category-color';
 
 export interface ProductDetailDialogData {
   product: Product;
@@ -19,6 +20,7 @@ export interface ProductDetailDialogData {
 export class ProductDetailDialog {
   private readonly dialogRef = inject(MatDialogRef<ProductDetailDialog>);
   readonly product = inject<ProductDetailDialogData>(MAT_DIALOG_DATA).product;
+  readonly categoryChipClass = categoryChipClass;
 
   close(): void {
     this.dialogRef.close();
