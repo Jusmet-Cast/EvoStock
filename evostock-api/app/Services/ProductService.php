@@ -21,7 +21,7 @@ class ProductService
     }
 
     /**
-     * @param  array{name: string, description?: ?string, price: float, stock: int, is_active?: bool, category_ids?: int[]}  $data
+     * @param  array{name: string, description?: ?string, price: float, stock: int, entry_date: string, is_active?: bool, category_ids?: int[]}  $data
      */
     public function create(array $data): Product
     {
@@ -35,7 +35,7 @@ class ProductService
     }
 
     /**
-     * @param  array{name?: string, description?: ?string, price?: float, stock?: int, is_active?: bool, category_ids?: int[]}  $data
+     * @param  array{name?: string, description?: ?string, price?: float, stock?: int, entry_date?: string, is_active?: bool, category_ids?: int[]}  $data
      */
     public function update(Product $product, array $data): Product
     {

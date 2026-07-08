@@ -21,6 +21,7 @@ class UpdateProductRequest extends FormRequest
             'description' => ['nullable', 'string'],
             'price' => ['sometimes', 'required', 'numeric', 'min:0'],
             'stock' => ['sometimes', 'required', 'integer', 'min:0'],
+            'entry_date' => ['sometimes', 'required', 'date'],
             'is_active' => ['sometimes', 'boolean'],
             'category_ids' => ['sometimes', 'array'],
             'category_ids.*' => ['integer', 'exists:categories,id'],

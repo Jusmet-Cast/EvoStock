@@ -38,6 +38,17 @@
     </div>
 
     <mat-form-field appearance="outline">
+      <mat-label>Fecha de ingreso</mat-label>
+      <input matInput type="date" formControlName="entry_date" />
+      @if (form.controls.entry_date.hasError('required') && form.controls.entry_date.touched) {
+        <mat-error>La fecha de ingreso es obligatoria.</mat-error>
+      }
+      @if (form.controls.entry_date.hasError('server')) {
+        <mat-error>{{ form.controls.entry_date.getError('server') }}</mat-error>
+      }
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
       <mat-label>Categorías</mat-label>
       <mat-select formControlName="category_ids" multiple>
         @for (category of categories(); track category.id) {

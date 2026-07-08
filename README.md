@@ -15,7 +15,7 @@ Cada proyecto tiene su propio README con los 9 puntos de documentación (tecnolo
 
 - **Autenticación** por token Bearer (login / logout).
 - **Categorías**: crear, editar, activar/desactivar, eliminar (soft delete), listar y buscar. Regla de negocio: no se permiten nombres duplicados.
-- **Productos**: CRUD completo con detalle, relación N:M con categorías, búsqueda, filtro por categoría y por estado, y ordenamiento por nombre o fecha.
+- **Productos**: CRUD completo con detalle, relación N:M con categorías, fecha de ingreso, búsqueda, filtro por categoría y por estado, y ordenamiento por nombre o fecha de ingreso.
 - **Dashboard**: total de productos y categorías, productos activos/inactivos, bajo inventario (< 10 unidades) y últimos productos registrados.
 - **Transversal**: paginación, confirmación antes de eliminar, mensajes de éxito/error, formularios validados, estados de carga y manejo centralizado de errores.
 

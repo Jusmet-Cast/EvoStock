@@ -22,6 +22,14 @@ export interface ProductFormDialogData {
   product?: Product;
 }
 
+/** Local (not UTC) YYYY-MM-DD for the native date input's default value. */
+function todayIso(): string {
+  const now = new Date();
+  const month = String(now.getMonth() + 1).padStart(2, '0');
+  const day = String(now.getDate()).padStart(2, '0');
+  return `${now.getFullYear()}-${month}-${day}`;
+}
+
 @Component({
   selector: 'app-product-form-dialog',
   imports: [
@@ -53,6 +61,7 @@ export class ProductFormDialog {
     description: [this.data.product?.description ?? ''],
     price: [this.data.product?.price ?? 0, [Validators.required, Validators.min(0)]],
     stock: [this.data.product?.stock ?? 0, [Validators.required, Validators.min(0)]],
+    entry_date: [this.data.product?.entry_date ?? todayIso(), [Validators.required]],
     is_active: [this.data.product?.is_active ?? true],
     category_ids: [this.data.product?.categories.map((category) => category.id) ?? []],
   });
@@ -82,7 +91,7 @@ export class ProductFormDialog {
         this.saving.set(false);
         const validation = error.error as ApiValidationError | undefined;
 
-        for (const field of ['name', 'price', 'stock'] as const) {
+        for (const field of ['name', 'price', 'stock', 'entry_date'] as const) {
           const message = validation?.errors?.[field]?.[0];
           if (message) {
             this.form.controls[field].setErrors({ server: message });

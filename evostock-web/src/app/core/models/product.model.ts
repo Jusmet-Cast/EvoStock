@@ -6,6 +6,7 @@ export interface Product {
   description: string | null;
   price: number;
   stock: number;
+  entry_date: string;
   is_active: boolean;
   categories: Category[];
   created_at: string;
@@ -17,6 +18,7 @@ export interface ProductPayload {
   description: string | null;
   price: number;
   stock: number;
+  entry_date: string;
   is_active: boolean;
   category_ids: number[];
 }
@@ -25,7 +27,7 @@ export interface ProductFilters {
   search?: string;
   category_id?: number | null;
   status?: boolean | null;
-  sort_by?: 'name' | 'created_at';
+  sort_by?: 'name' | 'entry_date';
   sort_dir?: 'asc' | 'desc';
   page?: number;
   per_page?: number;
