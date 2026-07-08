@@ -89,7 +89,7 @@ php artisan test
 | GET | `/auth/me` | Usuario autenticado | Sí |
 | GET/POST | `/categories` | Listar (con `search`) / crear | Sí |
 | GET/PUT/DELETE | `/categories/{id}` | Detalle / actualizar / eliminar (soft delete) | Sí |
-| GET/POST | `/products` | Listar (con `search`, `category_id`, `status`, `sort_by`, `sort_dir`) / crear | Sí |
+| GET/POST | `/products` | Listar (con `search`, `category_id`, `status`, `sort_by` = `name`\|`entry_date`, `sort_dir`) / crear | Sí |
 | GET/PUT/DELETE | `/products/{id}` | Detalle / actualizar / eliminar (soft delete) | Sí |
 | GET | `/dashboard` | Totales, activos/inactivos, bajo inventario, últimos productos | Sí |
 
