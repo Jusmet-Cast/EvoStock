@@ -1,15 +1,54 @@
+// Same brand gradient as the login page, so the shell reads as a
+// continuation of the same identity rather than a different app.
+$brand-gradient: linear-gradient(135deg, var(--mat-sys-primary), var(--mat-sys-tertiary));
+
 .shell {
   height: 100vh;
 }
 
 .shell-sidenav {
   width: 240px;
-  padding-top: 8px;
+  background: $brand-gradient;
+  color: #fff;
+  box-shadow: none;
+
+  // Nav item text/icons default to on-surface (dark) — override for
+  // legibility against the blue background.
+  --mat-list-list-item-label-text-color: #fff;
+  --mat-list-list-item-leading-icon-color: rgba(255, 255, 255, 0.85);
+  --mat-list-list-item-hover-label-text-color: #fff;
+  --mat-list-list-item-hover-leading-icon-color: #fff;
+  --mat-list-list-item-hover-state-layer-color: rgba(255, 255, 255, 0.12);
+}
+
+.shell-brand {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px 24px 12px;
+}
+
+.shell-brand-logo {
+  height: 34px;
+  width: auto;
 }
 
 .shell-toolbar {
   --mat-toolbar-standard-height: 56px;
   --mat-toolbar-mobile-height: 56px;
+  --mat-toolbar-container-text-color: #fff;
+  // mat-icon-button (menu / logout) reads its own color token, not the
+  // toolbar's text-color token — without this it stayed a low-contrast
+  // dark tone against the blue background.
+  --mat-icon-button-icon-color: #fff;
+  --mat-icon-button-state-layer-color: #fff;
+  background: $brand-gradient;
+}
+
+.shell-toolbar-logo {
+  height: 22px;
+  width: auto;
+  margin-right: 4px;
 }
 
 .shell-title {
@@ -33,6 +72,8 @@
   margin: 0 auto;
 }
 
+// Translucent white indicator reads correctly on the blue sidenav,
+// unlike the default secondary-container token (tuned for light surfaces).
 ::ng-deep .active-link {
-  background-color: var(--mat-sys-secondary-container);
+  background-color: rgba(255, 255, 255, 0.16) !important;
 }

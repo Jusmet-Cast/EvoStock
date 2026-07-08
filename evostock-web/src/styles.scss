@@ -66,6 +66,14 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .data-table {
   width: 100%;
 
+  // A lighter tint of the same primary blue used by the shell — enough
+  // to mark the header row without competing with it.
+  th {
+    background-color: var(--mat-sys-primary-container);
+    color: var(--mat-sys-on-primary-container);
+    font-weight: 600;
+  }
+
   tbody tr {
     transition: background-color 0.1s ease;
 
