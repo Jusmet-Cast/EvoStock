@@ -1,6 +1,6 @@
 # EvoStock API
 
-Backend del Sistema de Gestión de Productos (prueba técnica — Programador Digital Senior, Evollution / Corporación Lady Lee). Expone una API REST (Laravel + Sanctum) para los módulos de Categorías, Productos y Dashboard, consumida por un cliente Angular (en `evostock-web`, en desarrollo).
+Backend del Sistema de Gestión de Productos (prueba técnica — Programador Digital Senior, Evollution / Corporación Lady Lee). Expone una API REST (Laravel + Sanctum) para los módulos de Categorías, Productos y Dashboard, consumida por el cliente Angular en [`evostock-web`](../evostock-web/README.md).
 
 ## 1. Tecnología utilizada
 
