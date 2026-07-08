@@ -45,6 +45,9 @@ EvoStock/
 ## Arranque rápido
 
 ```bash
+git clone https://github.com/Jusmet-Cast/EvoStock.git
+cd EvoStock
+
 # 1. Backend
 cd evostock-api
 composer install

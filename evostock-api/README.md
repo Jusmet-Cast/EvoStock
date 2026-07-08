@@ -33,7 +33,7 @@ En otras palabras, también usé la prueba como una oportunidad de acoplamiento 
 ## 4. Instalación
 
 ```bash
-git clone <url-del-repositorio>
+git clone https://github.com/Jusmet-Cast/EvoStock.git
 cd EvoStock/evostock-api
 
 composer install
