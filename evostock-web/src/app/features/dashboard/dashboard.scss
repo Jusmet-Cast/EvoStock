@@ -11,15 +11,47 @@
   align-items: flex-start;
   gap: 4px;
   padding: 16px;
+  border-left: 4px solid transparent;
+  transition: box-shadow 0.15s ease, transform 0.15s ease;
+
+  &:hover {
+    box-shadow: var(--mat-sys-level2);
+    transform: translateY(-1px);
+  }
 }
 
 .stat-icon {
-  color: var(--mat-sys-primary);
   margin-bottom: 4px;
 }
 
-.stat-card-warn .stat-icon {
-  color: var(--mat-sys-error);
+.stat-card-primary {
+  border-left-color: var(--mat-sys-primary);
+
+  .stat-icon { color: var(--mat-sys-primary); }
+}
+
+.stat-card-violet {
+  border-left-color: #7e57c2;
+
+  .stat-icon { color: #7e57c2; }
+}
+
+.stat-card-success {
+  border-left-color: #2e7d32;
+
+  .stat-icon { color: #2e7d32; }
+}
+
+.stat-card-muted {
+  border-left-color: var(--mat-sys-outline);
+
+  .stat-icon { color: var(--mat-sys-on-surface-variant); }
+}
+
+.stat-card-warn {
+  border-left-color: #f9a825;
+
+  .stat-icon { color: #f9a825; }
 }
 
 .stat-value {

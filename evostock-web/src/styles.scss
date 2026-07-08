@@ -60,10 +60,27 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   background-color: var(--mat-sys-surface-container-low);
   border-radius: 12px;
   overflow-x: auto;
+  box-shadow: var(--mat-sys-level1);
 }
 
 .data-table {
   width: 100%;
+
+  // A lighter tint of the same primary blue used by the shell — enough
+  // to mark the header row without competing with it.
+  th {
+    background-color: var(--mat-sys-primary-container);
+    color: var(--mat-sys-on-primary-container);
+    font-weight: 600;
+  }
+
+  tbody tr {
+    transition: background-color 0.1s ease;
+
+    &:hover {
+      background-color: var(--mat-sys-surface-container-high);
+    }
+  }
 }
 
 .actions-header,
@@ -78,16 +95,26 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 }
 
 .chip-active {
-  background-color: var(--mat-sys-tertiary-container) !important;
-  color: var(--mat-sys-on-tertiary-container) !important;
+  background-color: #e8f5e9 !important;
+  color: #2e7d32 !important;
 }
 
 .chip-inactive {
-  background-color: var(--mat-sys-surface-container-highest) !important;
-  color: var(--mat-sys-on-surface-variant) !important;
+  background-color: #eeeeee !important;
+  color: #616161 !important;
 }
 
+// Amber, not error-red: low stock is a heads-up, not a broken state —
+// keeps it visually distinct from real validation errors (e.g. duplicate name).
 .low-stock {
-  color: var(--mat-sys-error);
+  color: #f9a825;
   font-weight: 600;
 }
+
+// Deterministic pastel palette for category chips (see category-color.ts).
+.cat-color-0 { background-color: #e3f2fd !important; color: #1565c0 !important; }
+.cat-color-1 { background-color: #e0f7fa !important; color: #00838f !important; }
+.cat-color-2 { background-color: #f3e5f5 !important; color: #6a1b9a !important; }
+.cat-color-3 { background-color: #f1f8e9 !important; color: #558b2f !important; }
+.cat-color-4 { background-color: #fff3e0 !important; color: #ef6c00 !important; }
+.cat-color-5 { background-color: #fce4ec !important; color: #ad1457 !important; }

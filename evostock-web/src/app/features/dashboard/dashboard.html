@@ -5,7 +5,7 @@
 } @else if (summary(); as summary) {
   <div class="stat-grid">
     @for (card of cards(); track card.label) {
-      <mat-card class="stat-card" [class.stat-card-warn]="card.accent === 'warn'">
+      <mat-card class="stat-card" [class]="'stat-card-' + card.accent">
         <mat-icon class="stat-icon">{{ card.icon }}</mat-icon>
         <div class="stat-value">{{ card.value }}</div>
         <div class="stat-label">{{ card.label }}</div>

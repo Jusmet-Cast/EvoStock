@@ -8,11 +8,13 @@ import { MatTableModule } from '@angular/material/table';
 import { DashboardSummary } from '../../core/models/dashboard.model';
 import { DashboardService } from './dashboard.service';
 
+type StatAccent = 'primary' | 'violet' | 'success' | 'muted' | 'warn';
+
 interface StatCard {
   label: string;
   value: number;
   icon: string;
-  accent?: 'warn';
+  accent: StatAccent;
 }
 
 @Component({
@@ -42,10 +44,10 @@ export class Dashboard {
       next: (summary) => {
         this.summary.set(summary);
         this.cards.set([
-          { label: 'Total de productos', value: summary.total_products, icon: 'inventory_2' },
-          { label: 'Total de categorías', value: summary.total_categories, icon: 'category' },
-          { label: 'Productos activos', value: summary.active_products, icon: 'check_circle' },
-          { label: 'Productos inactivos', value: summary.inactive_products, icon: 'cancel' },
+          { label: 'Total de productos', value: summary.total_products, icon: 'inventory_2', accent: 'primary' },
+          { label: 'Total de categorías', value: summary.total_categories, icon: 'category', accent: 'violet' },
+          { label: 'Productos activos', value: summary.active_products, icon: 'check_circle', accent: 'success' },
+          { label: 'Productos inactivos', value: summary.inactive_products, icon: 'cancel', accent: 'muted' },
           {
             label: 'Bajo inventario (< 10)',
             value: summary.low_stock_products,

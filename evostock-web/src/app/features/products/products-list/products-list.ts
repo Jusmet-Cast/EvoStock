@@ -18,7 +18,9 @@ import { Category } from '../../../core/models/category.model';
 import { Product } from '../../../core/models/product.model';
 import { NotificationService } from '../../../core/services/notification.service';
 import { ConfirmDialog } from '../../../shared/components/confirm-dialog/confirm-dialog';
+import { categoryChipClass } from '../../../shared/utils/category-color';
 import { CategoriesService } from '../../categories/categories.service';
+import { ProductDetailDialog } from '../product-detail-dialog/product-detail-dialog';
 import { ProductFormDialog } from '../product-form-dialog/product-form-dialog';
 import { ProductsService } from '../products.service';
 
@@ -63,6 +65,7 @@ export class ProductsList {
 
   readonly displayedColumns = ['name', 'price', 'stock', 'entry_date', 'categories', 'is_active', 'actions'];
   readonly sortOptions = SORT_OPTIONS;
+  readonly categoryChipClass = categoryChipClass;
 
   readonly searchControl = new FormControl('', { nonNullable: true });
   readonly categoryControl = new FormControl<number | null>(null);
@@ -132,6 +135,17 @@ export class ProductsList {
         if (result) {
           this.notifications.success('Producto creado correctamente.');
           this.load();
+        }
+      });
+  }
+
+  openDetailDialog(product: Product): void {
+    this.dialog
+      .open(ProductDetailDialog, { data: { product }, width: '520px' })
+      .afterClosed()
+      .subscribe((result) => {
+        if (result === 'edit') {
+          this.openEditDialog(product);
         }
       });
   }
