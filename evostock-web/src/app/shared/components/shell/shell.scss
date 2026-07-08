@@ -6,6 +6,22 @@
   width: 240px;
 }
 
+.shell-brand {
+  display: flex;
+  align-items: center;
+  padding: 20px 24px;
+}
+
+.shell-brand-logo {
+  height: 40px;
+  width: auto;
+}
+
+.shell-toolbar-logo {
+  height: 24px;
+  width: auto;
+}
+
 .shell-title {
   font-weight: 600;
   letter-spacing: 0.02em;
