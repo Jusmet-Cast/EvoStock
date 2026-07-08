@@ -38,7 +38,7 @@ class CategoryController extends Controller
 
     public function show(Category $category): JsonResponse
     {
-        return CategoryResource::make($category)->response();
+        return CategoryResource::make($category->loadCount('products'))->response();
     }
 
     public function update(UpdateCategoryRequest $request, Category $category): JsonResponse
