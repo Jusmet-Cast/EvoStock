@@ -1,0 +1,23 @@
+.filters-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 16px;
+
+  mat-form-field {
+    min-width: 180px;
+  }
+
+  .search-field {
+    flex: 1 1 260px;
+    min-width: 220px;
+  }
+}
+
+.low-stock-icon {
+  font-size: 16px;
+  height: 16px;
+  width: 16px;
+  vertical-align: middle;
+  margin-left: 4px;
+}
