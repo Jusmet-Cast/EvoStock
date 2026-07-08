@@ -69,7 +69,12 @@ Detalle de requisitos, configuración y variables de entorno en el README de cad
 
 ## Por qué Laravel + Angular
 
-Ambas tecnologías se eligieron por la misma razón: alinearme con el stack que usa Corporación Lady Lee, más que por dominio previo — fue un reto autoimpuesto para desempolvar PHP y llevar criterios de arquitectura ya conocidos a convenciones nuevas (Laravel) y a un framework de frontend estructurado (Angular). El detalle completo de esta decisión está en [`evostock-api/README.md`](evostock-api/README.md) (sección 2).
+Cada tecnología se eligió por una razón distinta:
+
+- **Laravel** fue un reto autoimpuesto. Corporación Lady Lee lo usa como uno de sus frameworks principales, así que lo tomé para alinearme con su stack y desempolvar PHP, aun sin tener experiencia amplia con el framework. Esto implicó una carga investigativa considerable: documentación, asistencia con IA y una revisión panorámica del framework.
+- **Angular** lo elegí sobre Next.js porque ya es una tecnología con la que tengo relación y con la que me he estado familiarizando desde hace un tiempo. Eso me permitió acelerar el desarrollo del frontend sin la investigación profunda que sí demandó Laravel, y concentrar ese esfuerzo donde estaba el verdadero reto (el backend), optimizando el tiempo total de la prueba.
+
+El detalle de cada decisión está en el README de su proyecto ([backend](evostock-api/README.md), [frontend](evostock-web/README.md), sección 2).
 
 ## Arquitectura, en una frase
 

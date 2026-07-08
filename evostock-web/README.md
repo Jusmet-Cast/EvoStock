@@ -11,7 +11,9 @@ Frontend del Sistema de Gestión de Productos (prueba técnica — Programador D
 
 ## 2. Justificación de la elección
 
-Angular se evaluó junto con Next.js para el frontend; se optó por Angular por ser, junto con Laravel, parte del stack que maneja Corporación Lady Lee — la misma lógica de alineamiento con el ambiente técnico del corporativo que motivó la elección de Laravel en el backend (ver `evostock-api/README.md`, sección 2). Angular Material se eligió sobre Tailwind a medida porque entrega de fábrica exactamente las piezas que pide el brief (tabla+paginación, diálogo de confirmación, snackbar de éxito/error, spinners de carga) con una apariencia corporativa consistente, sin invertir tiempo de la prueba construyendo esos primitivos desde cero.
+A diferencia del backend, Angular no lo elegí por alineamiento con el stack del corporativo (ese fue el motivo de Laravel, ver `evostock-api/README.md`, sección 2), sino porque ya es una tecnología con la que tengo relación y con la que me he estado familiarizando desde hace un tiempo. Frente a Next.js, esa familiaridad me permitió acelerar los procesos de abstracción del frontend sin la carga investigativa que sí implicó Laravel (donde tuve que apoyarme de lleno en documentación, asistencia con IA y una revisión panorámica del framework). Fue, en la práctica, una decisión para optimizar el tiempo de trabajo: concentrar el esfuerzo de aprendizaje en el backend —el verdadero reto autoimpuesto— y resolver el cliente con una herramienta que ya manejo.
+
+Dentro de Angular, elegí **Angular Material** sobre un Tailwind a medida porque entrega de fábrica exactamente las piezas que pide el brief (tabla+paginación, diálogo de confirmación, snackbar de éxito/error, spinners de carga) con una apariencia corporativa consistente, sin invertir tiempo de la prueba construyendo esos primitivos desde cero.
 
 ## 3. Requisitos
 
