@@ -33,7 +33,6 @@ import { CategoryFormDialog } from '../category-form-dialog/category-form-dialog
     MatTooltipModule,
   ],
   templateUrl: './categories-list.html',
-  styleUrl: './categories-list.scss',
 })
 export class CategoriesList {
   private readonly categoriesService = inject(CategoriesService);
