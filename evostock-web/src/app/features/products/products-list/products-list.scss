@@ -21,3 +21,17 @@
   vertical-align: middle;
   margin-left: 4px;
 }
+
+.link-button {
+  padding: 0;
+  border: none;
+  background: none;
+  font: inherit;
+  color: var(--mat-sys-primary);
+  cursor: pointer;
+  text-align: left;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}

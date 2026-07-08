@@ -1,0 +1,63 @@
+<h2 mat-dialog-title>Detalle del producto</h2>
+
+<mat-dialog-content class="detail-content">
+  <h3 class="detail-name">{{ product.name }}</h3>
+  @if (product.description) {
+    <p class="detail-description">{{ product.description }}</p>
+  } @else {
+    <p class="detail-description detail-muted">Sin descripción.</p>
+  }
+
+  <dl class="detail-grid">
+    <div class="detail-item">
+      <dt>Precio</dt>
+      <dd>{{ product.price | currency }}</dd>
+    </div>
+
+    <div class="detail-item">
+      <dt>Stock</dt>
+      <dd [class.low-stock]="product.stock < 10">
+        {{ product.stock }}
+        @if (product.stock < 10) {
+          <mat-icon class="detail-warn-icon">warning</mat-icon>
+        }
+      </dd>
+    </div>
+
+    <div class="detail-item">
+      <dt>Fecha de ingreso</dt>
+      <dd>{{ product.entry_date | date: 'dd/MM/yyyy' : 'UTC' }}</dd>
+    </div>
+
+    <div class="detail-item">
+      <dt>Estado</dt>
+      <dd>
+        <mat-chip-set>
+          <mat-chip [class.chip-active]="product.is_active" [class.chip-inactive]="!product.is_active">
+            {{ product.is_active ? 'Activo' : 'Inactivo' }}
+          </mat-chip>
+        </mat-chip-set>
+      </dd>
+    </div>
+  </dl>
+
+  <div class="detail-block">
+    <dt>Categorías</dt>
+    <mat-chip-set>
+      @for (category of product.categories; track category.id) {
+        <mat-chip>{{ category.name }}</mat-chip>
+      }
+      @if (!product.categories.length) {
+        <span class="detail-muted">Sin categorías asignadas.</span>
+      }
+    </mat-chip-set>
+  </div>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button type="button" (click)="close()">Cerrar</button>
+  <button mat-flat-button color="primary" type="button" (click)="edit()">
+    <mat-icon>edit</mat-icon>
+    Editar
+  </button>
+</mat-dialog-actions>
