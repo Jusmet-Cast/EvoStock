@@ -11,6 +11,7 @@ class EloquentCategoryRepository implements CategoryRepositoryInterface
     public function paginate(array $filters, int $perPage = 15): LengthAwarePaginator
     {
         return Category::query()
+            ->withCount('products')
             ->when($filters['search'] ?? null, fn ($query, $search) => $query->where('name', 'like', "%{$search}%"))
             ->orderBy('name')
             ->paginate($perPage)
